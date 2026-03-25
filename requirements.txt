@@ -1,0 +1,6 @@
+openai
+python-dotenv
+requests
+PyGithub
+slack_sdk
+sendgrid

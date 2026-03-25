@@ -1,0 +1,143 @@
+[
+  {
+    "message_id": "msg_1",
+    "from_agent": "CEO",
+    "to_agent": "Product",
+    "message_type": "task_assignment",
+    "payload": {
+      "task": "Create product specification",
+      "startup_idea": "FAST BookSwap: a campus marketplace for used books, notes, and study materials.",
+      "requirements": [
+        "Define target users",
+        "Define core features",
+        "Define value proposition",
+        "Define simple user flow"
+      ]
+    },
+    "timestamp": "2026-03-25T13:43:09.991609+00:00",
+    "parent_message_id": null
+  },
+  {
+    "message_id": "msg_2",
+    "from_agent": "CEO",
+    "to_agent": "Engineer",
+    "message_type": "task_assignment",
+    "payload": {
+      "task": "Build landing page",
+      "startup_idea": "FAST BookSwap: a campus marketplace for used books, notes, and study materials.",
+      "requirements": [
+        "Create a clean HTML landing page",
+        "Include title, subtitle, features, and CTA button",
+        "Prepare code for GitHub commit and PR"
+      ]
+    },
+    "timestamp": "2026-03-25T13:43:10.000105+00:00",
+    "parent_message_id": null
+  },
+  {
+    "message_id": "msg_3",
+    "from_agent": "CEO",
+    "to_agent": "Marketing",
+    "message_type": "task_assignment",
+    "payload": {
+      "task": "Create marketing content",
+      "startup_idea": "FAST BookSwap: a campus marketplace for used books, notes, and study materials.",
+      "requirements": [
+        "Write tagline",
+        "Write short social post",
+        "Write cold email",
+        "Prepare Slack announcement"
+      ]
+    },
+    "timestamp": "2026-03-25T13:43:10.008470+00:00",
+    "parent_message_id": null
+  },
+  {
+    "message_id": "msg_4",
+    "from_agent": "Product",
+    "to_agent": "CEO",
+    "message_type": "product_spec",
+    "payload": {
+      "product_name": "FAST BookSwap",
+      "startup_idea": "FAST BookSwap: a campus marketplace for used books, notes, and study materials.",
+      "target_users": "FAST students who want to buy, sell, or exchange used books, notes, and study materials.",
+      "problem_statement": "Students often struggle to find affordable and relevant academic resources within campus.",
+      "value_proposition": "A simple campus marketplace for exchanging study materials quickly and affordably.",
+      "core_features": [
+        "Post books and notes for sale or exchange",
+        "Search and filter by course, semester, and category",
+        "Direct contact between buyers and sellers",
+        "Simple listing cards for easy browsing"
+      ],
+      "user_flow": [
+        "User signs in with campus identity",
+        "User browses listings",
+        "User posts an item or contacts a seller",
+        "User arranges exchange or purchase"
+      ]
+    },
+    "timestamp": "2026-03-25T13:43:10.021878+00:00",
+    "parent_message_id": "msg_1"
+  },
+  {
+    "message_id": "msg_5",
+    "from_agent": "Engineer",
+    "to_agent": "CEO",
+    "message_type": "engineering_output",
+    "payload": {
+      "status": "landing_page_created",
+      "file_path": "landing_page.html",
+      "summary": "Created landing page"
+    },
+    "timestamp": "2026-03-25T13:43:10.040768+00:00",
+    "parent_message_id": "msg_2"
+  },
+  {
+    "message_id": "msg_6",
+    "from_agent": "Marketing",
+    "to_agent": "CEO",
+    "message_type": "marketing_output",
+    "payload": {
+      "tagline": "Buy, Sell, and Swap Study Materials \u2014 All Within FAST.",
+      "social_post": "Tired of expensive textbooks? \ud83d\udcda FAST BookSwap lets you buy, sell, and exchange books and notes with fellow students. Join the waitlist today!",
+      "cold_email": "Subject: Introducing FAST BookSwap\n\nHi there,\n\nWe're launching FAST BookSwap \u2014 a simple campus marketplace for students to exchange books, notes, and study materials.\n\nSave money and help fellow students succeed.\n\nJoin the waitlist today.\n\nBest,\nFAST BookSwap Team",
+      "slack_message": "*FAST BookSwap Launch \ud83d\ude80*\nBuy, sell, and exchange study materials within campus.\nJoin the waitlist and start saving today!"
+    },
+    "timestamp": "2026-03-25T13:43:10.055683+00:00",
+    "parent_message_id": "msg_3"
+  },
+  {
+    "message_id": "msg_7",
+    "from_agent": "QA",
+    "to_agent": "CEO",
+    "message_type": "qa_feedback",
+    "payload": {
+      "feedback": "Landing page should include contact email and stronger CTA button. | Marketing copy can include urgency like limited-time access."
+    },
+    "timestamp": "2026-03-25T13:43:10.066241+00:00",
+    "parent_message_id": null
+  },
+  {
+    "message_id": "msg_8",
+    "from_agent": "CEO",
+    "to_agent": "Engineer",
+    "message_type": "revision_request",
+    "payload": {
+      "task": "Revise landing page based on QA feedback",
+      "feedback": "Landing page should include contact email and stronger CTA button. | Marketing copy can include urgency like limited-time access."
+    },
+    "timestamp": "2026-03-25T13:43:10.078986+00:00",
+    "parent_message_id": "msg_7"
+  },
+  {
+    "message_id": "msg_9",
+    "from_agent": "Engineer",
+    "to_agent": "CEO",
+    "message_type": "revision_completed",
+    "payload": {
+      "status": "Landing page updated after QA feedback"
+    },
+    "timestamp": "2026-03-25T13:43:10.088712+00:00",
+    "parent_message_id": "msg_8"
+  }
+]
