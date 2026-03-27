@@ -39,6 +39,14 @@ print("\nAll messages in bus:")
 for msg in bus.get_messages():
     print(json.dumps(msg, indent=2, ensure_ascii=False))
 
+print("\n--- Engineer applying revision ---")
+rev = engineer.handle_revision()
+print(rev)
+
+print("\n--- Engineer creating GitHub PR ---")
+pr = engineer.create_github_pr()
+print(pr)
+
 print("\n--- QA agent reviewing ---")
 qa_response = qa.review_outputs()
 
