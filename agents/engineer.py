@@ -1,7 +1,6 @@
 import os
 from github import Github
 from dotenv import load_dotenv
-
 from message_bus import MessageBus
 from pathlib import Path
 
@@ -14,41 +13,34 @@ class EngineerAgent:
     def process_task(self):
         messages = self.bus.get_messages_for_agent(self.name)
         if not messages:
-            print("No messages for Engineer agent.")
             return None
 
         latest_task = messages[-1]
         startup_idea = latest_task["payload"].get("startup_idea", "FAST BookSwap")
 
         html_content = f"""<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{startup_idea}</title>
+<title>{startup_idea}</title>
 </head>
 <body>
-    <h1>FAST BookSwap</h1>
-    <p>A simple campus marketplace for buying, selling, and exchanging used books.</p>
-    <button>Join Waitlist</button>
+<h1>FAST BookSwap</h1>
+<p>Campus marketplace for used books.</p>
+<button>Join Waitlist</button>
 </body>
 </html>
 """
 
-        output_file = Path("landing_page.html")
-        output_file.write_text(html_content, encoding="utf-8")
-
-        response_payload = {
-            "status": "landing_page_created",
-            "file_path": str(output_file),
-            "summary": "Created landing page"
-        }
+        Path("landing_page.html").write_text(html_content, encoding="utf-8")
 
         response = self.bus.create_message(
             from_agent=self.name,
             to_agent="CEO",
-            message_type="engineering_output",
-            payload=response_payload,
+            message_type="result",
+            payload={
+                "result_type": "engineering_output",
+                "status": "landing_page_created"
+            },
             parent_message_id=latest_task["message_id"]
         )
 
@@ -66,102 +58,114 @@ class EngineerAgent:
         if not revision_msg:
             return None
 
-        feedback = revision_msg["payload"]["feedback"]
-
-        updated_html = f"""<!DOCTYPE html>
+        updated_html = """<!DOCTYPE html>
 <html>
 <head>
-    <title>FAST BookSwap</title>
+<title>FAST BookSwap</title>
 </head>
 <body>
-    <h1>FAST BookSwap</h1>
-    <p>Buy, Sell, and Swap study materials within campus.</p>
-
-    <h2>Why use FAST BookSwap?</h2>
-    <ul>
-        <li>Affordable textbooks</li>
-        <li>Course-specific notes</li>
-        <li>Connect with students</li>
-    </ul>
-
-    <button>Join Waitlist Now</button>
-
-    <p>Contact: fastbookswap@fast.edu.pk</p>
-
-    <hr>
-    <small>Updated after QA feedback: {feedback}</small>
+<h1>FAST BookSwap</h1>
+<p>Buy and sell books easily.</p>
+<button>Join Now</button>
+<p>Contact: fastbookswap@fast.edu.pk</p>
 </body>
 </html>
 """
 
-        with open("landing_page.html", "w", encoding="utf-8") as f:
-            f.write(updated_html)
+        Path("landing_page.html").write_text(updated_html, encoding="utf-8")
 
         response = self.bus.create_message(
             from_agent=self.name,
             to_agent="CEO",
-            message_type="revision_completed",
-            payload={"status": "Landing page updated after QA feedback"},
+            message_type="confirmation",
+            payload={
+                "result_type": "revision_completed",
+                "status": "Landing page updated"
+            },
             parent_message_id=revision_msg["message_id"]
         )
 
         return response
+
+    def create_github_issue(self, repo):
+        try:
+            issue = repo.create_issue(
+                title="Initial landing page",
+                body="Auto-created by Engineer agent to track landing page implementation."
+            )
+            return issue.html_url
+        except Exception:
+            issues = repo.get_issues(state="open")
+            for i in issues:
+                if i.title == "Initial landing page":
+                    return i.html_url
+            return None
 
     def create_github_pr(self):
         load_dotenv()
 
         token = os.getenv("GITHUB_TOKEN")
         repo_name = os.getenv("GITHUB_REPO")
-        base_branch = os.getenv("GITHUB_BRANCH", "main")
-
-        if not token or not repo_name:
-            print("GitHub config missing.")
-            return None
 
         g = Github(token)
         repo = g.get_repo(repo_name)
 
-        new_branch = "agent-update-landing"
+        branch = "agent-update-landing"
+
+        # create branch if not exists
         try:
             repo.create_git_ref(
-                ref=f"refs/heads/{new_branch}",
-                sha=repo.get_branch(base_branch).commit.sha
+                ref=f"refs/heads/{branch}",
+                sha=repo.get_branch("main").commit.sha
             )
         except:
             pass
 
-        with open("landing_page.html", "r", encoding="utf-8") as f:
-            content = f.read()
+        content = Path("landing_page.html").read_text(encoding="utf-8")
 
+        # create/update file
         try:
             repo.create_file(
                 "landing_page.html",
-                "Agent updated landing page",
+                "Agent update",
                 content,
-                branch=new_branch
+                branch=branch
             )
         except:
-            contents = repo.get_contents("landing_page.html", ref=new_branch)
+            contents = repo.get_contents("landing_page.html", ref=branch)
             repo.update_file(
                 contents.path,
-                "Agent updated landing page",
+                "Agent update",
                 content,
                 contents.sha,
-                branch=new_branch
+                branch=branch
             )
 
-        pr = repo.create_pull(
-            title="Agent Update: Landing Page Improvement",
-            body="This PR was automatically generated by Engineer Agent after QA feedback.",
-            head=new_branch,
-            base=base_branch
-        )
+        # create PR
+        try:
+            pr = repo.create_pull(
+                title="Agent Update Landing Page",
+                body="Auto PR by Engineer agent",
+                head=branch,
+                base="main"
+            )
+            pr_url = pr.html_url
+        except Exception:
+            pulls = repo.get_pulls(state='open', head=f"{repo.owner.login}:{branch}")
+            pr_url = pulls[0].html_url if pulls.totalCount > 0 else "PR already exists"
+
+        # create issue (NEW)
+        issue_url = self.create_github_issue(repo)
 
         response = self.bus.create_message(
             from_agent=self.name,
             to_agent="CEO",
-            message_type="github_pr_created",
-            payload={"pr_url": pr.html_url}
+            message_type="confirmation",
+            payload={
+                "result_type": "github_artifacts",
+                "pr_url": pr_url,
+                "issue_url": issue_url
+            }
         )
 
         return response

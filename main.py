@@ -9,6 +9,7 @@ from agents.engineer import EngineerAgent
 from agents.marketing import MarketingAgent
 from agents.qa import QAAgent
 
+
 bus = MessageBus()
 bus.clear_messages()
 
@@ -18,49 +19,52 @@ engineer = EngineerAgent(bus)
 marketing = MarketingAgent(bus)
 qa = QAAgent(bus)
 
-startup_idea = "FAST BookSwap: a campus marketplace for used books, notes, and study materials."
+startup_idea = "FAST BookSwap: campus marketplace for used books"
 
 print("\n--- CEO starting project ---")
 ceo.start_project(startup_idea)
 
-print("\n--- Product agent working ---")
+print("\n--- Product agent ---")
 product.process_task()
 
-print("\n--- Engineer agent working ---")
+print("\n--- Engineer agent ---")
 engineer.process_task()
 
-print("\n--- Marketing agent working ---")
-marketing_response = marketing.process_task()
+print("\n--- Marketing agent ---")
+marketing.process_task()
 
-print("\nMarketing response:")
-print(json.dumps(marketing_response, indent=2, ensure_ascii=False))
+print("\n--- QA agent ---")
+qa.review_outputs()
 
-print("\nAll messages in bus:")
+print("\n--- CEO revision decision ---")
+ceo.handle_qa_feedback()
+
+print("\n--- Engineer revision ---")
+engineer.handle_revision()
+
+print("\n--- GitHub PR creation ---")
+engineer.create_github_pr()
+# Slack Notification
+# ---------------------------
+from slack_sdk import WebClient
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+token = os.getenv("SLACK_BOT_TOKEN")
+channel = os.getenv("SLACK_CHANNEL")
+
+try:
+    client = WebClient(token=token)
+    client.chat_postMessage(
+        channel=channel,
+        text="🚀 LaunchMind Multi-Agent workflow completed successfully!\nGitHub PR created."
+    )
+    print("Slack notification sent.")
+except Exception as e:
+    print("Slack error:", e)
+
+print("\n--- Final Messages ---")
 for msg in bus.get_messages():
     print(json.dumps(msg, indent=2, ensure_ascii=False))
-
-print("\n--- Engineer applying revision ---")
-rev = engineer.handle_revision()
-print(rev)
-
-print("\n--- Engineer creating GitHub PR ---")
-pr = engineer.create_github_pr()
-print(pr)
-
-print("\n--- QA agent reviewing ---")
-qa_response = qa.review_outputs()
-
-print("\nQA response:")
-print(json.dumps(qa_response, indent=2, ensure_ascii=False))
-
-print("\n--- CEO reviewing QA feedback ---")
-revision = ceo.handle_qa_feedback()
-
-print("\nCEO revision request:")
-print(json.dumps(revision, indent=2, ensure_ascii=False))
-
-print("\n--- Engineer applying revision ---")
-rev = engineer.handle_revision()
-
-print("\nRevision result:")
-print(json.dumps(rev, indent=2, ensure_ascii=False))

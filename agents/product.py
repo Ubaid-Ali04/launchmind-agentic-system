@@ -7,42 +7,64 @@ class ProductAgent:
         self.name = "Product"
 
     def process_task(self):
-        """
-        Read the latest message assigned to Product and generate product specs.
-        """
         messages = self.bus.get_messages_for_agent(self.name)
         if not messages:
-            print("No messages for Product agent.")
             return None
 
         latest_task = messages[-1]
-        startup_idea = latest_task["payload"].get("startup_idea", "Unknown idea")
+        startup_idea = latest_task["payload"].get("startup_idea", "Startup")
 
         product_spec = {
             "product_name": "FAST BookSwap",
             "startup_idea": startup_idea,
-            "target_users": "FAST students who want to buy, sell, or exchange used books, notes, and study materials.",
-            "problem_statement": "Students often struggle to find affordable and relevant academic resources within campus.",
-            "value_proposition": "A simple campus marketplace for exchanging study materials quickly and affordably.",
-            "core_features": [
-                "Post books and notes for sale or exchange",
-                "Search and filter by course, semester, and category",
-                "Direct contact between buyers and sellers",
-                "Simple listing cards for easy browsing"
+
+            "value_proposition":
+                "A campus-first marketplace that helps students buy, sell, "
+                "and exchange used academic books at affordable prices.",
+
+            "target_users": "University students",
+
+            "personas": [
+                {
+                    "name": "Ali - Budget Student",
+                    "goal": "Find affordable textbooks",
+                    "pain_point": "New books are expensive"
+                },
+                {
+                    "name": "Sara - Final Year Student",
+                    "goal": "Sell old books",
+                    "pain_point": "No easy resale platform"
+                },
+                {
+                    "name": "Usman - Freshman",
+                    "goal": "Get course-specific material",
+                    "pain_point": "Does not know seniors"
+                }
             ],
-            "user_flow": [
-                "User signs in with campus identity",
-                "User browses listings",
-                "User posts an item or contacts a seller",
-                "User arranges exchange or purchase"
+
+            "ranked_features": [
+                "Post used books",
+                "Search by course",
+                "Direct contact with seller",
+                "Campus filtering",
+                "Wishlist / alerts"
+            ],
+
+            "user_stories": [
+                "As a student, I want to search books by course so I can find relevant material.",
+                "As a seller, I want to post my used books so I can recover costs.",
+                "As a buyer, I want to contact seller directly so I can negotiate price."
             ]
         }
 
         response = self.bus.create_message(
             from_agent=self.name,
             to_agent="CEO",
-            message_type="product_spec",
-            payload=product_spec,
+            message_type="result",
+            payload={
+                "result_type": "product_spec",
+                "data": product_spec
+            },
             parent_message_id=latest_task["message_id"]
         )
 
