@@ -6,128 +6,133 @@ The system demonstrates **multi-agent orchestration**, **LLM-based decision maki
 
 ---
 
-# 🧠 System Overview
+## 🧠 System Overview
 
 LaunchMind simulates a startup team where specialized AI agents collaborate:
 
-- 👨‍💼 **CEO Agent** — Task planning & decision making (LLM-powered)
-- 📦 **Product Agent** — Product specification generation
-- 🛠 **Engineer Agent** — Landing page creation & revisions
-- 📢 **Marketing Agent** — Marketing content + email + Slack
-- 🧪 **QA Agent** — Quality review & feedback loop
-- 📨 **Message Bus** — Structured inter-agent communication
+* 👨‍💼 **CEO Agent** — Task planning & decision making (LLM-powered)
+* 📦 **Product Agent** — Product specification generation
+* 🛠 **Engineer Agent** — Landing page creation & revisions
+* 📢 **Marketing Agent** — Marketing content + Email + Slack
+* 🧪 **QA Agent** — Quality review & feedback loop
+* 📨 **Message Bus** — Structured inter-agent communication
 
 ---
 
-# 🏗 Architecture Diagram
-CEO Agent
-│
-├── Product Agent
-│ └── Product Specification
-│
-├── Engineer Agent
-│ ├── Landing Page Generation
-│ ├── GitHub Issue Creation
-│ └── GitHub PR Creation
-│
-├── Marketing Agent
-│ ├── SendGrid Email
-│ └── Slack Notification
-│
-└── QA Agent
-└── Feedback → CEO → Engineer Revision Loop
----
-# 🔄 Message Flow
+## 🏗 Architecture Diagram
 
+```
+                +----------------+
+                |    CEO Agent   |
+                +--------+-------+
+                         |
+    -------------------------------------------
+    |                     |                  |
++------------+   +--------------+   +------------+
+| Product    |   |  Engineer    |   | Marketing  |
+|   Agent    |   |    Agent     |   |   Agent    |
++------------+   +--------------+   +------------+
+       |                |                  |
+ Product Spec      Landing Page      Email + Slack
+                         |
+                     GitHub Issue
+                         |
+                     GitHub PR
+                         |
+                     +--------+
+                     |  QA    |
+                     | Agent  |
+                     +---+----+
+                         |
+                    Feedback Loop
+                         |
+                     CEO Decision
+                         |
+                 Engineer Revision
+```
+
+---
+
+## 🔄 Message Flow
+
+```
 CEO → Product → CEO
 CEO → Engineer → CEO
 CEO → Marketing → CEO
 QA → CEO → Engineer (revision)
 Engineer → GitHub (Issue + PR)
 Marketing → Email + Slack
-
-
----
-
-# ✨ Features
-
-- Multi-agent autonomous collaboration
-- Structured message-based communication
-- LLM-powered CEO reasoning
-- QA feedback and revision loop
-- GitHub Issue auto-creation
-- GitHub Pull Request automation
-- Landing page generation
-- Slack notification integration
-- SendGrid email integration
-- Fallback logic when LLM unavailable
-- End-to-end autonomous startup pipeline
+```
 
 ---
 
-# 📂 Project Structure
+## ✨ Features
+
+* Multi-agent autonomous collaboration
+* Structured message-based communication
+* LLM-powered CEO reasoning
+* QA feedback and revision loop
+* GitHub Issue auto-creation
+* GitHub Pull Request automation
+* Landing page generation
+* Slack notification integration
+* SendGrid email integration
+* Fallback logic when LLM unavailable
+* End-to-end autonomous startup pipeline
 
 ---
 
-# ✨ Features
+## 📂 Project Structure
 
-- Multi-agent autonomous collaboration
-- Structured message-based communication
-- LLM-powered CEO reasoning
-- QA feedback and revision loop
-- GitHub Issue auto-creation
-- GitHub Pull Request automation
-- Landing page generation
-- Slack notification integration
-- SendGrid email integration
-- Fallback logic when LLM unavailable
-- End-to-end autonomous startup pipeline
-
----
-
-# 📂 Project Structure
-launchmind-agents/
+```
+launchmind-agentic-system/
 │
 ├── agents/
-│ ├── ceo.py
-│ ├── product.py
-│ ├── engineer.py
-│ ├── marketing.py
-│ └── qa.py
+│   ├── ceo.py
+│   ├── product.py
+│   ├── engineer.py
+│   ├── marketing.py
+│   └── qa.py
 │
 ├── message_bus.py
 ├── main.py
 ├── config.py
+├── landing_page.html
+├── messages.json
 ├── requirements.txt
 ├── .env.example
-└── landing_page.html
-
+└── README.md
+```
 
 ---
 
-# ⚙️ Setup
+## ⚙️ Setup
 
 ### 1. Clone Repository
 
+```
 git clone https://github.com/YOUR_USERNAME/launchmind-agentic-system.git
-
 cd launchmind-agentic-system
+```
 
 ### 2. Create Virtual Environment
+
+```
 python -m venv .venv
 .venv\Scripts\activate
-
+```
 
 ### 3. Install Dependencies
 
-
+```
 pip install -r requirements.txt
-
+```
 
 ### 4. Configure Environment Variables
 
 Create `.env` file:
 
+```
 OPENAI_API_KEY=your_key_here
 GEMINI_API_KEY=your_key_here
 GITHUB_TOKEN=your_token_here
@@ -136,16 +141,19 @@ SLACK_WEBHOOK_URL=your_webhook
 SENDGRID_API_KEY=your_sendgrid_key
 EMAIL_FROM=verified_email
 EMAIL_TO=receiver_email
+```
 
 ---
 
-# ▶️ Run System
+## ▶️ Run System
 
-python main.py  
+```
+python main.py
+```
 
 ---
 
-# 🔄 Workflow
+## 🔄 Workflow
 
 1. CEO analyzes startup idea
 2. Tasks distributed to Product, Engineer, Marketing
@@ -160,56 +168,56 @@ python main.py
 
 ---
 
-# 🧪 Example Output
+## 🧪 Example Output
 
-- Product specification generated
-- Landing page created
-- Marketing content produced
-- QA feedback applied
-- GitHub Issue created
-- GitHub Pull Request created
-- Slack notification sent
-- Email notification delivered
+* Product specification generated
+* Landing page created
+* Marketing content produced
+* QA feedback applied
+* GitHub Issue created
+* GitHub Pull Request created
+* Slack notification sent
+* Email notification delivered
 
 ---
 
-# 🤖 LLM Integration
+## 🤖 LLM Integration
 
 CEO agent uses LLM for:
 
-- Task decomposition
-- Revision decision making
-- Agent coordination
+* Task decomposition
+* Revision decision making
+* Agent coordination
 
 Fallback logic ensures the system runs even when API quota is unavailable.
 
 ---
 
-# 📈 Learning Objectives
+## 📈 Learning Objectives
 
-- Agentic AI system design
-- Multi-agent orchestration
-- Structured message schema
-- LLM integration
-- GitHub automation
-- QA feedback loops
-- Autonomous workflow pipelines
+* Agentic AI system design
+* Multi-agent orchestration
+* Structured message schema
+* LLM integration
+* GitHub automation
+* QA feedback loops
+* Autonomous workflow pipelines
 
 ---
 
-# 👨‍💻 Author
+## 👨‍💻 Author
 
-**Ubaid Ali**  
+**Ubaid Ali**
 MS Data Science — FAST NUCES
 
 ---
 
-# 📜 License
+## 📜 License
 
 This project is for academic and research purposes.
 
 ---
 
-# ⭐ Acknowledgment
+## ⭐ Acknowledgment
 
 Built as part of an Agentic AI assignment demonstrating autonomous multi-agent collaboration and workflow automation.
