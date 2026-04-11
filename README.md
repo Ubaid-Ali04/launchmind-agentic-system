@@ -230,8 +230,6 @@ The Marketing agent posts a Block Kit launch message, and the CEO agent posts th
 ---
 ## 👥 Group Members
 
-| Name 
-|------------
 | Ubaid Ali 
 | Muhammad Saad 
 | Tasawar Hasnain 
