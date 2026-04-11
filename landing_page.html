@@ -5,38 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAST BookSwap | Swap Books Instantly</title>
     <style>
-        :root { --primary: #2563eb; --dark: #1e293b; --light: #f8fafc; }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; line-height: 1.6; color: var(--dark); background: var(--light); }
-        .container { max-width: 1000px; margin: 0 auto; padding: 4rem 2rem; text-align: center; }
+        :root {
+            --primary: #2563eb;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
         h1 { font-size: 3rem; margin-bottom: 1rem; color: var(--primary); }
-        .subheadline { font-size: 1.25rem; margin-bottom: 3rem; color: #64748b; }
-        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 3rem; }
-        .feature-card { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .cta-button { background: var(--primary); color: white; padding: 1rem 2rem; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; text-decoration: none; transition: background 0.3s; }
-        .cta-button:hover { background: #1d4ed8; }
+        .subheadline { font-size: 1.25rem; color: #64748b; margin-bottom: 3rem; }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        .cta-button {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .cta-button:hover { transform: scale(1.05); }
     </style>
 </head>
 <body>
+
     <div class="container">
         <h1>FAST BookSwap</h1>
-        <p class="subheadline">Clear your shelves and discover your next favorite read in seconds.</p>
-        
+        <p class="subheadline">Turn your finished reads into your next adventure in seconds.</p>
+
         <div class="features">
             <div class="feature-card">
-                <h3>Lightning Fast Swaps</h3>
-                <p>Our matching algorithm connects you with nearby readers in real-time.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Verified Community</h3>
-                <p>Trade with confidence thanks to our peer-review and rating system.</p>
+                <h3>Lightning Fast</h3>
+                <p>Our matching algorithm connects you with local readers in minutes, not days.</p>
             </div>
             <div class="feature-card">
                 <h3>Zero Fees</h3>
-                <p>Swap books for free. No subscriptions, just pure literary exchange.</p>
+                <p>Swap books entirely for free. Just pay for your own shipping or meet in person.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Secure Community</h3>
+                <p>Verified profiles and rating systems ensure every swap is safe and reliable.</p>
             </div>
         </div>
 
-        <a href="#" class="cta-button">Start Swapping Today</a>
+        <button class="cta-button">Get Started Today</button>
     </div>
+
 </body>
 </html>
