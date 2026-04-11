@@ -9,7 +9,6 @@ from agents.engineer import EngineerAgent
 from agents.marketing import MarketingAgent
 from agents.qa import QAAgent
 
-
 bus = MessageBus()
 bus.clear_messages()
 
@@ -31,10 +30,20 @@ print("\n--- Engineer agent ---")
 engineer.process_task()
 
 print("\n--- Marketing agent ---")
-marketing.process_task()
+marketing_content = marketing.process_task()
+
+print("\n--- GitHub PR creation ---")
+pr_artifacts = engineer.create_github_pr()
+pr_url = None
+if isinstance(pr_artifacts, dict):
+    pr_url = pr_artifacts.get("payload", {}).get("pr_url")
+
+print("\n--- Marketing Slack message ---")
+if marketing_content and pr_url:
+    marketing.post_slack(marketing_content, pr_url)
 
 print("\n--- QA agent ---")
-qa.review_outputs()
+qa_result = qa.review_outputs()
 
 print("\n--- CEO revision decision ---")
 ceo.handle_qa_feedback()
@@ -42,28 +51,13 @@ ceo.handle_qa_feedback()
 print("\n--- Engineer revision ---")
 engineer.handle_revision()
 
-print("\n--- GitHub PR creation ---")
-engineer.create_github_pr()
-# Slack Notification
-# ---------------------------
-from slack_sdk import WebClient
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
-
-token = os.getenv("SLACK_BOT_TOKEN")
-channel = os.getenv("SLACK_CHANNEL")
-
-try:
-    client = WebClient(token=token)
-    client.chat_postMessage(
-        channel=channel,
-        text="🚀 LaunchMind Multi-Agent workflow completed successfully!\nGitHub PR created."
-    )
-    print("Slack notification sent.")
-except Exception as e:
-    print("Slack error:", e)
+print("\n--- CEO final summary ---")
+qa_payload = qa_result.get("payload", {}) if isinstance(qa_result, dict) else {}
+ceo.post_final_summary(
+    pr_url=pr_url,
+    marketing_content=marketing_content or {},
+    qa_result=qa_payload
+)
 
 print("\n--- Final Messages ---")
 for msg in bus.get_messages():

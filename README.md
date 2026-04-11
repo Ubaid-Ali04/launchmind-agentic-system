@@ -245,3 +245,14 @@ This project is for academic and research purposes.
 ## ⭐ Acknowledgment
 
 Built as part of an Agentic AI assignment demonstrating autonomous multi-agent collaboration and workflow automation.
+
+## 📸 Demo Screenshots
+
+### Marketing Slack Message
+![Marketing Slack](screenshots/slack_marketing.png)
+
+### CEO Final Summary
+![CEO Summary](screenshots/slack_ceo_summary.png)
+
+### GitHub Pull Request
+![GitHub PR](screenshots/github_pr.png)

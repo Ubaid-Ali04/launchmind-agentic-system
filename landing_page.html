@@ -1,12 +1,53 @@
+```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>FAST BookSwap</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limited Time Offer | Unlock Your Potential</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; margin: 0; padding: 0; color: #333; }
+        .hero { background: #f4f4f4; padding: 60px 20px; text-align: center; }
+        .badge { background: #e74c3c; color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; display: inline-block; margin-bottom: 20px; }
+        .cta-container { max-width: 500px; margin: 30px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        input[type="email"] { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background: #27ae60; color: white; border: none; cursor: pointer; font-size: 16px; }
+        .support-link { margin-top: 15px; display: block; color: #666; text-decoration: underline; font-size: 14px; }
+        #timer { font-size: 1.5rem; font-weight: bold; color: #e74c3c; margin: 10px 0; }
+    </style>
 </head>
 <body>
-<h1>FAST BookSwap</h1>
-<p>Buy and sell books easily.</p>
-<button>Join Now</button>
-<p>Contact: fastbookswap@fast.edu.pk</p>
+
+    <section class="hero">
+        <div class="badge">Limited Time Offer: 24 Hours Only</div>
+        <h1>Elevate Your Workflow with Precision</h1>
+        <p>The ultimate toolkit designed to streamline your success.</p>
+        
+        <div id="timer">00:23:59</div>
+
+        <div class="cta-container">
+            <h3>Get Instant Access Today</h3>
+            <form id="signup-form">
+                <input type="email" placeholder="Enter your work email" required>
+                <button type="submit">Start My Free Trial Now</button>
+            </form>
+            <a href="mailto:support@example.com" class="support-link">Need help? Contact Support</a>
+        </div>
+    </section>
+
+    <script>
+        // Simple Countdown Timer Logic
+        let time = 86340; // 23 hours, 59 minutes
+        const timerDisplay = document.getElementById('timer');
+        
+        setInterval(() => {
+            time--;
+            const hours = Math.floor(time / 3600);
+            const minutes = Math.floor((time % 3600) / 60);
+            const seconds = time % 60;
+            timerDisplay.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }, 1000);
+    </script>
 </body>
 </html>
+```
