@@ -6,14 +6,22 @@ The system demonstrates **multi-agent orchestration**, **LLM-based decision maki
 
 ---
 
+## 💡 Startup Idea
+
+FAST BookSwap is a campus-based marketplace that allows students to buy, sell, and trade used textbooks within their university.
+Students verify using university email, list books using ISBN scanning, and coordinate safe on-campus meetups.
+The goal is to reduce textbook costs and promote sustainable reuse of academic materials.
+
+---
+
 ## 🧠 System Overview
 
 LaunchMind simulates a startup team where specialized AI agents collaborate:
 
 * 👨‍💼 **CEO Agent** — Task planning & decision making (LLM-powered)
 * 📦 **Product Agent** — Product specification generation
-* 🛠 **Engineer Agent** — Landing page creation & revisions
-* 📢 **Marketing Agent** — Marketing content + Email + Slack
+* 🛠 **Engineer Agent** — Landing page creation & revisions + GitHub automation
+* 📢 **Marketing Agent** — Marketing content + Email + Slack Block Kit message
 * 🧪 **QA Agent** — Quality review & feedback loop
 * 📨 **Message Bus** — Structured inter-agent communication
 
@@ -59,9 +67,10 @@ LaunchMind simulates a startup team where specialized AI agents collaborate:
 CEO → Product → CEO
 CEO → Engineer → CEO
 CEO → Marketing → CEO
-QA → CEO → Engineer (revision)
 Engineer → GitHub (Issue + PR)
 Marketing → Email + Slack
+QA → CEO → Engineer (revision)
+CEO → Slack Final Summary
 ```
 
 ---
@@ -75,10 +84,22 @@ Marketing → Email + Slack
 * GitHub Issue auto-creation
 * GitHub Pull Request automation
 * Landing page generation
-* Slack notification integration
+* Slack Block Kit notification
 * SendGrid email integration
-* Fallback logic when LLM unavailable
 * End-to-end autonomous startup pipeline
+* Real-world platform automation
+
+---
+
+## 🔗 Platform Integrations
+
+| Platform         | Agent           | Action                                        |
+| ---------------- | --------------- | --------------------------------------------- |
+| GitHub           | Engineer Agent  | Creates issue, commits landing page, opens PR |
+| GitHub           | QA Agent        | Posts inline review comments                  |
+| Slack            | Marketing Agent | Posts launch message using Block Kit          |
+| Slack            | CEO Agent       | Posts final summary                           |
+| Email (SendGrid) | Marketing Agent | Sends cold outreach email                     |
 
 ---
 
@@ -96,7 +117,6 @@ launchmind-agentic-system/
 │
 ├── message_bus.py
 ├── main.py
-├── config.py
 ├── landing_page.html
 ├── messages.json
 ├── requirements.txt
@@ -111,7 +131,7 @@ launchmind-agentic-system/
 ### 1. Clone Repository
 
 ```
-git clone https://github.com/YOUR_USERNAME/launchmind-agentic-system.git
+git clone https://github.com/Ubaid-Ali04/launchmind-agentic-system.git
 cd launchmind-agentic-system
 ```
 
@@ -133,11 +153,11 @@ pip install -r requirements.txt
 Create `.env` file:
 
 ```
-OPENAI_API_KEY=your_key_here
 GEMINI_API_KEY=your_key_here
 GITHUB_TOKEN=your_token_here
 GITHUB_REPO=username/repo
-SLACK_WEBHOOK_URL=your_webhook
+SLACK_BOT_TOKEN=your_token
+SLACK_CHANNEL=#launches
 SENDGRID_API_KEY=your_sendgrid_key
 EMAIL_FROM=verified_email
 EMAIL_TO=receiver_email
@@ -157,18 +177,33 @@ python main.py
 
 1. CEO analyzes startup idea
 2. Tasks distributed to Product, Engineer, Marketing
-3. Agents generate outputs
-4. QA reviews outputs
-5. CEO decides revision
-6. Engineer updates landing page
-7. GitHub Issue automatically created
-8. GitHub Pull Request created
-9. Slack notification sent
-10. Email notification sent
+3. Product generates product specification
+4. Engineer builds landing page
+5. Marketing generates copy and sends email
+6. Engineer creates GitHub Issue and Pull Request
+7. Marketing posts Slack launch message
+8. QA reviews PR and posts comments
+9. CEO reasons over QA feedback
+10. Engineer revises landing page
+11. CEO posts final Slack summary
 
 ---
 
-## 🧪 Example Output
+## 🔗 Example GitHub Pull Request
+
+https://github.com/Ubaid-Ali04/launchmind-agentic-system/pull/2
+
+---
+
+## 💬 Slack Integration
+
+The Marketing agent posts a Block Kit launch message, and the CEO agent posts the final summary message after QA review and revision.
+
+(Slack screenshots should be added here for submission)
+
+---
+
+## 🧪 Example Outputs
 
 * Product specification generated
 * Landing page created
@@ -176,24 +211,23 @@ python main.py
 * QA feedback applied
 * GitHub Issue created
 * GitHub Pull Request created
-* Slack notification sent
+* Slack launch message posted
 * Email notification delivered
+* CEO final summary posted
 
 ---
 
-## 🤖 LLM Integration
+## 👥 Group Members
 
-CEO agent uses LLM for:
-
-* Task decomposition
-* Revision decision making
-* Agent coordination
-
-Fallback logic ensures the system runs even when API quota is unavailable.
+| Name      | Role                       |
+| --------- | -------------------------- |
+| Ubaid Ali | CEO Agent & Orchestration  |
+| Member 2  | Engineer Agent             |
+| Member 3  | Marketing Agent & QA Agent |
 
 ---
 
-## 📈 Learning Objectives
+## 🎓 Learning Objectives
 
 * Agentic AI system design
 * Multi-agent orchestration
@@ -202,13 +236,6 @@ Fallback logic ensures the system runs even when API quota is unavailable.
 * GitHub automation
 * QA feedback loops
 * Autonomous workflow pipelines
-
----
-
-## 👨‍💻 Author
-
-**Ubaid Ali**
-MS Data Science — FAST NUCES
 
 ---
 
