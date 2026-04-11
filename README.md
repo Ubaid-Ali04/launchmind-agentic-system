@@ -217,16 +217,6 @@ The Marketing agent posts a Block Kit launch message, and the CEO agent posts th
 
 ---
 
-## 👥 Group Members
-
-| Name      | Role                       |
-| --------- | -------------------------- |
-| Ubaid Ali | CEO Agent & Orchestration  |
-| Member 2  | Engineer Agent             |
-| Member 3  | Marketing Agent & QA Agent |
-
----
-
 ## 🎓 Learning Objectives
 
 * Agentic AI system design
@@ -238,6 +228,13 @@ The Marketing agent posts a Block Kit launch message, and the CEO agent posts th
 * Autonomous workflow pipelines
 
 ---
+## 👥 Group Members
+
+| Name 
+|------------
+| Ubaid Ali 
+| Muhammad Saad 
+| Tasawar Hasnain 
 
 ## 📜 License
 
