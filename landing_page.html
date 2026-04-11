@@ -12,8 +12,8 @@
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
             line-height: 1.6;
+            margin: 0;
             color: var(--dark);
             background-color: var(--light);
         }
@@ -23,56 +23,55 @@
             padding: 4rem 2rem;
             text-align: center;
         }
-        h1 { font-size: 3rem; margin-bottom: 1rem; color: var(--primary); }
-        .subheadline { font-size: 1.25rem; color: #64748b; margin-bottom: 3rem; }
+        header h1 { font-size: 3rem; color: var(--primary); margin-bottom: 0.5rem; }
+        header p { font-size: 1.25rem; color: #64748b; margin-bottom: 2rem; }
         .features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            margin-bottom: 4rem;
+            margin: 4rem 0;
         }
-        .feature-card {
-            background: white;
+        .feature-item {
             padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
         }
         .cta-button {
-            background: var(--primary);
+            background-color: var(--primary);
             color: white;
             padding: 1rem 2.5rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: transform 0.2s;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s ease;
         }
-        .cta-button:hover { transform: scale(1.05); }
+        .cta-button:hover { background-color: #1d4ed8; }
     </style>
 </head>
 <body>
-
     <div class="container">
-        <h1>FAST BookSwap</h1>
-        <p class="subheadline">Turn your finished reads into your next adventure in seconds.</p>
+        <header>
+            <h1>FAST BookSwap</h1>
+            <p>Turn your finished reads into your next adventure in seconds.</p>
+        </header>
 
-        <div class="features">
-            <div class="feature-card">
+        <section class="features">
+            <div class="feature-item">
                 <h3>Lightning Fast</h3>
-                <p>Our matching algorithm connects you with local readers in minutes, not days.</p>
+                <p>Our localized matching algorithm connects you with nearby readers in minutes, not days.</p>
             </div>
-            <div class="feature-card">
-                <h3>Zero Fees</h3>
-                <p>Swap books entirely for free. Just pay for your own shipping or meet in person.</p>
+            <div class="feature-item">
+                <h3>Zero Cost</h3>
+                <p>Swap books entirely for free. No subscription fees, no hidden shipping charges.</p>
             </div>
-            <div class="feature-card">
-                <h3>Secure Community</h3>
-                <p>Verified profiles and rating systems ensure every swap is safe and reliable.</p>
+            <div class="feature-item">
+                <h3>Verified Community</h3>
+                <p>Join a trusted network of book lovers with integrated rating and review systems.</p>
             </div>
-        </div>
+        </section>
 
-        <button class="cta-button">Get Started Today</button>
+        <a href="#join" class="cta-button">Start Swapping Now</a>
     </div>
-
 </body>
 </html>
