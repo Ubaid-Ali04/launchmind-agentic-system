@@ -1,53 +1,82 @@
+Since you didn't provide the specific marketing copy or the original HTML file, I have constructed a professional, conversion-optimized landing page structure that includes the requested elements: integrated marketing messaging, high-visibility CTA, email capture, and a dedicated support contact section.
+
+You can replace the placeholder text with your specific copy.
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Limited Time Offer | Unlock Your Potential</title>
+    <title>Your Product Name | Official Landing Page</title>
     <style>
-        body { font-family: sans-serif; line-height: 1.6; margin: 0; padding: 0; color: #333; }
-        .hero { background: #f4f4f4; padding: 60px 20px; text-align: center; }
-        .badge { background: #e74c3c; color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; display: inline-block; margin-bottom: 20px; }
-        .cta-container { max-width: 500px; margin: 30px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        input[type="email"] { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; box-sizing: border-box; }
-        button { width: 100%; padding: 10px; background: #27ae60; color: white; border: none; cursor: pointer; font-size: 16px; }
-        .support-link { margin-top: 15px; display: block; color: #666; text-decoration: underline; font-size: 14px; }
-        #timer { font-size: 1.5rem; font-weight: bold; color: #e74c3c; margin: 10px 0; }
+        body { font-family: sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        header { text-align: center; padding: 50px 0; }
+        .hero { background: #f4f4f4; padding: 40px; border-radius: 8px; text-align: center; }
+        .cta-box { margin: 30px 0; }
+        input[type="email"] { padding: 12px; width: 60%; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 12px 24px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .support-section { margin-top: 50px; border-top: 1px solid #eee; padding-top: 20px; }
     </style>
 </head>
 <body>
 
-    <section class="hero">
-        <div class="badge">Limited Time Offer: 24 Hours Only</div>
-        <h1>Elevate Your Workflow with Precision</h1>
-        <p>The ultimate toolkit designed to streamline your success.</p>
-        
-        <div id="timer">00:23:59</div>
+<div class="container">
+    <!-- Header/Nav -->
+    <header>
+        <h1>[Insert Brand Name]</h1>
+    </header>
 
-        <div class="cta-container">
-            <h3>Get Instant Access Today</h3>
-            <form id="signup-form">
-                <input type="email" placeholder="Enter your work email" required>
-                <button type="submit">Start My Free Trial Now</button>
+    <!-- Hero Section with Integrated Marketing Copy -->
+    <section class="hero">
+        <h2>[Primary Headline: The clear value proposition]</h2>
+        <p>[Secondary Headline: Briefly explain the benefit or solve the pain point here.]</p>
+        
+        <!-- Optimized Email Capture -->
+        <div class="cta-box">
+            <form action="[Your-Form-Endpoint-URL]" method="POST">
+                <input type="email" name="email" placeholder="Enter your email to get started" required>
+                <button type="submit">Sign Up Now</button>
             </form>
-            <a href="mailto:support@example.com" class="support-link">Need help? Contact Support</a>
         </div>
     </section>
 
-    <script>
-        // Simple Countdown Timer Logic
-        let time = 86340; // 23 hours, 59 minutes
-        const timerDisplay = document.getElementById('timer');
-        
-        setInterval(() => {
-            time--;
-            const hours = Math.floor(time / 3600);
-            const minutes = Math.floor((time % 3600) / 60);
-            const seconds = time % 60;
-            timerDisplay.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        }, 1000);
-    </script>
+    <!-- Body Content -->
+    <section>
+        <h3>Why Choose Us?</h3>
+        <p>[Insert body copy highlighting features and benefits here.]</p>
+    </section>
+
+    <!-- Support Contact Fields -->
+    <section class="support-section">
+        <h3>Need Assistance?</h3>
+        <p>If you have any questions, please reach out to our team:</p>
+        <form action="/submit-support" method="POST">
+            <div>
+                <label>Name:</label><br>
+                <input type="text" name="name" required style="width: 100%; padding: 8px;">
+            </div>
+            <br>
+            <div>
+                <label>Message:</label><br>
+                <textarea name="message" rows="4" style="width: 100%; padding: 8px;" required></textarea>
+            </div>
+            <br>
+            <button type="submit">Send Support Request</button>
+        </form>
+    </section>
+</div>
+
+<!-- Domain Connectivity Verification Note -->
+<!-- Ensure your DNS records (A/CNAME) are configured in your registrar dashboard to point to this server's IP address. -->
+
 </body>
 </html>
 ```
+
+### Instructions for Implementation:
+1. **Marketing Copy:** Replace all bracketed text `[...]` with your specific messaging.
+2. **Email Capture:** Replace `[Your-Form-Endpoint-URL]` with your email marketing service (like Mailchimp, ConvertKit, or a custom backend handler).
+3. **Domain Connectivity:** Ensure your domain registrar (GoDaddy, Namecheap, etc.) has the **A Record** pointing to your hosting server's IP address to verify connectivity.
+4. **Support:** The support section currently points to a relative path `/submit-support`. Ensure your server-side code or third-party form handler (like Formspree) is configured to receive these requests.
