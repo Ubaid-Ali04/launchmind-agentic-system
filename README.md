@@ -228,11 +228,15 @@ The Marketing agent posts a Block Kit launch message, and the CEO agent posts th
 * Autonomous workflow pipelines
 
 ---
-## 👥 Group Members
+## 👥 Group Members & Contributions
 
-| Ubaid Ali 
-| Muhammad Saad 
-| Tasawar Hasnain 
+| Name              | Role(s)                                 |
+|------------------|------------------------------------------|
+| **Ubaid Ali**     | CEO Agent (Orchestrator), System Design |
+| **Muhammad Saad** | Engineer Agent (GitHub, Landing Page)  |
+| **Tasawar Hasnain** | Product, Marketing & QA Agents       | 
+
+
 
 ## 📜 License
 
